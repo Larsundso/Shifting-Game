@@ -39,13 +39,17 @@ public class Game {
   public boolean isValid() {
     Scanner scan = new Scanner(System.in);
     boolean valid;
+
     System.out.println("move number: ");
     int number = scan.nextInt();
+
     scan.close();
     valid = pitch.isValidSelection(number);
-    if (valid == false){
+
+    if (valid == false) {
       System.out.println("number cant be moved");
     }
+
     return valid;
   }
 
