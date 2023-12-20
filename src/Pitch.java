@@ -7,7 +7,7 @@ public class Pitch {
 
   // functions
 
-  public Pitch() {
+  Pitch() {
     for (int i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = new Field();
     }
