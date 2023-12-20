@@ -7,6 +7,14 @@ public class Field {
   private int y;
   private int value;
 
+  public Field(int x, int y, int value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+
+    if (value == 0) this.isEmpty = true; else this.isEmpty = false;
+  }
+
   // getters
 
   public boolean getEmpty() {

@@ -49,6 +49,10 @@ public class Pitch {
 
   // getters
 
+  public Field[] getFields() {
+    return this.fields;
+  }
+
   public Field[] getAdjacentFields(Field field) {
     Field[] adjacentFields = new Field[4];
 
