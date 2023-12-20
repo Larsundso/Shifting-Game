@@ -5,12 +5,6 @@ public class Pitch {
   private Field[] fields = new Field[9];
   private Field emptyField;
 
-  // konstructor
-
-  Pitch(){
-    
-  }
-
   // functions
 
   public Pitch() {
