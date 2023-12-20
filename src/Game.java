@@ -31,7 +31,7 @@ public class Game {
     return this.gameOver;
   }
 
-  public static void Main(String[] args) {
+  public static void main(String[] args) {
     Game game = new Game();
     game.initBoardRandom();
 
