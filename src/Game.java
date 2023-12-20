@@ -20,8 +20,8 @@ public class Game {
     }
 
     for (int i = 0; i < output.length; i++) {
-      for (int j = 0; j < output.length; i++) {
-        System.out.print(output[i][j]+" ");
+      for (int j = 0; j < output[i].length; j++) {
+        System.out.print(output[i][j] + " ");
       }
       System.out.println();
     }
@@ -29,15 +29,16 @@ public class Game {
 
   public void initBoardRandom() {
     this.pitch = new Pitch();
+    this.pitch.init(9);
   }
 
   public boolean isGameOver() {
     return this.gameOver;
   }
 
-  public boolean isValid(){
-    boolean valid;
+  public boolean isValid() {
     Scanner scan = new Scanner(System.in);
+    boolean valid;
     System.out.println("move number: ");
     int number = scan.nextInt();
     scan.close();
@@ -48,21 +49,18 @@ public class Game {
     return valid;
   }
 
-  public void input(){
+  public void input() {
     boolean valid;
-    do{
+    do {
       valid = isValid();
-    }
-    while(valid == false);
+    } while (valid == false);
   }
 
   public static void main(String[] args) {
-
     Game game = new Game();
     game.initBoardRandom();
 
     System.out.println("Welcome to switch game");
     game.printBoard();
-
   }
 }
