@@ -1,15 +1,14 @@
+import java.util.Scanner;
+
 public class Game {
 
   // values
 
-  private Pitch pitch;
+  private static Pitch pitch;
   private boolean gameOver = false;
+  private boolean valid = true;
 
   // functions
-
-  public Game() {
-    this.pitch = new Pitch();
-  }
 
   public void printBoard() {
     Field[] fields = this.pitch.getFields();
@@ -20,7 +19,7 @@ public class Game {
     for (Field field : fields) {
       output[field.getX()][field.getY()] = field.getValue();
     }
-    
+
     for (int i = 0; i < output.length; i++) {
       for (int j = 0; j < output.length; i++) {
         System.out.print(output[i][j]+" ");
@@ -30,18 +29,33 @@ public class Game {
   }
 
   public void initBoardRandom() {
-    this.pitch.init(3);
+    this.pitch = new Pitch();
   }
 
   public boolean isGameOver() {
     return this.gameOver;
   }
 
+  public void isValid(){
+    Scanner scan = new Scanner(System.in);
+    do{
+    System.out.println("move number: ");
+    int number = scan.nextInt();
+    valid = pitch.isValidSelection(number);}
+    while(valid == false);
+    
+    if(valid == false){
+      System.out.println("number cant be moved");
+    }
+  }
+
   public static void main(String[] args) {
+
     Game game = new Game();
     game.initBoardRandom();
 
     System.out.println("Welcome to switch game");
     game.printBoard();
+
   }
 }
