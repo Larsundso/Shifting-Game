@@ -6,7 +6,6 @@ public class Game {
 
   private Pitch pitch;
   private boolean gameOver = false;
-  private boolean valid = true;
 
   // functions
 
@@ -22,7 +21,7 @@ public class Game {
 
     for (int i = 0; i < output.length; i++) {
       for (int j = 0; j < output.length; i++) {
-        System.out.print(output[i][j] + " ");
+        System.out.print(output[i][j]+" ");
       }
       System.out.println();
     }
@@ -36,28 +35,29 @@ public class Game {
     return this.gameOver;
   }
 
-  public void isValid() {
+  public boolean isValid(){
+    boolean valid;
     Scanner scan = new Scanner(System.in);
-    do {
-      System.out.println("move number: ");
-      int number = scan.nextInt();
-      valid = pitch.isValidSelection(number);
-    } while (valid == false);
+    System.out.println("move number: ");
+    int number = scan.nextInt();
+    return valid = pitch.isValidSelection(number);
+  }
 
-    if (valid == false) {
-      System.out.println("number cant be moved");
+  public void input(){
+    boolean valid;
+    do{
+      valid = isValid();
     }
-
-    if (this.isGameOver()) {
-      scan.close();
-    }
+    while(valid == false);
   }
 
   public static void main(String[] args) {
+
     Game game = new Game();
     game.initBoardRandom();
 
     System.out.println("Welcome to switch game");
     game.printBoard();
+
   }
 }
