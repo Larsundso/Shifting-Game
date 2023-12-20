@@ -40,7 +40,12 @@ public class Game {
     Scanner scan = new Scanner(System.in);
     System.out.println("move number: ");
     int number = scan.nextInt();
-    return valid = pitch.isValidSelection(number);
+    scan.close();
+    valid = pitch.isValidSelection(number);
+    if (valid == false){
+      System.out.println("number cant be moved");
+    }
+    return valid;
   }
 
   public void input(){
