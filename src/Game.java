@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
@@ -45,7 +48,17 @@ public class Game {
 
   public void initBoardRandom() {
     this.pitch = new Pitch();
-    this.pitch.init();
+
+    Integer[] values = new Integer[9];
+    for (int i = 0; i < values.length; i += 1) {
+      values[i] = i;
+    }
+
+    List<Integer> valuesList = Arrays.asList(values);
+    Collections.shuffle(valuesList);
+    valuesList.toArray(values);
+
+    this.pitch.init(values);
   }
 
   public boolean isGameOver() {
@@ -69,10 +82,19 @@ public class Game {
   }
 
   public void input() {
-    System.out.println("move number: ");
+    System.out.println("move number: (or type \"a\" for auto)");
     this.moves += 1;
-    int number = this.scanner.nextInt();
-    boolean valid = this.pitch.isValidSelection(number);
+    String input = this.scanner.next();
+    int inputNum;
+    if (input.toLowerCase().equals("a")) {
+      inputNum = (int) Math.ceil(Math.random() * 9);
+
+      while (!this.pitch.isValidSelection(inputNum)) {
+        inputNum = (int) Math.ceil(Math.random() * 9);
+      }
+    } else inputNum = Integer.parseInt(input);
+
+    boolean valid = this.pitch.isValidSelection(inputNum);
 
     if (!valid) {
       System.out.println("number cant be moved");
@@ -80,7 +102,7 @@ public class Game {
       return;
     }
 
-    this.pitch.swapFields(this.pitch.getFieldByValue(number));
+    this.pitch.swapFields(this.pitch.getFieldByValue(inputNum));
     if (
       this.pitch.getFieldByCoordinates(0, 0).getValue() == 1 &&
       this.pitch.getFieldByCoordinates(0, 1).getValue() == 2 &&
@@ -105,6 +127,21 @@ public class Game {
 
     System.out.println("Welcome to 'Switch Game'");
     System.out.println();
+
+    System.out.println("Do you want to enter custom numbers? (Y/N)");
+    String custom = this.scanner.next().toLowerCase().trim();
+
+    if (custom.equals("y")) {
+      System.out.println("Enter 9 numbers from 0 to 8");
+
+      Integer[] values = new Integer[9];
+      for (int i = 0; i < values.length; i++) {
+        values[i] = this.scanner.nextInt();
+      }
+
+      this.pitch = new Pitch();
+      this.pitch.init(values);
+    }
 
     while (this.isGameOver() == false) {
       this.printBoard();
