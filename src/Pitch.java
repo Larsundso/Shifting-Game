@@ -6,16 +6,13 @@ public class Pitch {
 
   private Field[] fields = new Field[9];
   private Field emptyField;
-  private int size;
 
   // functions
 
   Pitch() {}
 
-  public void init(int size) {
-    this.size = size;
-
-    Integer[] values = new Integer[size * size];
+  public void init() {
+    Integer[] values = new Integer[9];
     for (int i = 0; i < values.length; i += 1) {
       values[i] = i;
     }
@@ -26,12 +23,12 @@ public class Pitch {
 
     for (int i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = new Field();
-      this.fields[i].init(i % size, i / size, values[i]);
+      this.fields[i].init(i % 3, i / 3, values[i]);
     }
   }
 
   public boolean isValidSelection(int selection) {
-    if (selection < 1 || selection > this.size) return false;
+    if (selection < 1 || selection > 9) return false;
 
     Field selectedField = null;
     for (Field field : this.fields) {
@@ -39,13 +36,17 @@ public class Pitch {
         selectedField = field;
       }
     }
+
     if (selectedField == null) return false;
 
-    List<Field> adjacentFields = Arrays.asList(
-      this.getAdjacentFields(selectedField)
-    );
+    Field[] adjacentFields = this.getAdjacentFields(this.getEmptyField());
 
-    return adjacentFields.contains(selectedField);
+    for (Field adjacentField : adjacentFields) {
+      if (adjacentField == null) continue;
+      if (adjacentField.getValue() == selectedField.getValue()) return true;
+    }
+
+    return false;
   }
 
   public void swapFields(Field field) {
@@ -57,11 +58,14 @@ public class Pitch {
   }
 
   public boolean isAdjacentFields(Field field1, Field field2) {
+    if (field1.getValue() == field2.getValue()) return false;
+
+    int xDifference = Math.abs(field1.getX() - field2.getX());
+    int yDifference = Math.abs(field1.getY() - field2.getY());
+
     if (
-      (
-        field1.getX() == field2.getX() - 1 || field1.getX() == field2.getX() + 1
-      ) &&
-      (field1.getY() == field2.getY() - 1 || field1.getY() == field2.getY() + 1)
+      (xDifference == 1 && yDifference == 0) ||
+      (xDifference == 0 && yDifference == 1)
     ) {
       return true;
     }
@@ -75,16 +79,34 @@ public class Pitch {
     return this.fields;
   }
 
+  public Field getFieldByValue(int value) {
+    for (Field field : this.fields) {
+      if (field.getValue() == value) return field;
+    }
+
+    return null;
+  }
+
+  public Field getFieldByCoordinates(int x, int y) {
+    for (Field field : this.fields) {
+      if (field.getX() == x && field.getY() == y) return field;
+    }
+
+    return null;
+  }
+
   public Field[] getAdjacentFields(Field field) {
     Field[] adjacentFields = new Field[4];
+    int index = 0;
 
-    for (int i = 0; i < adjacentFields.length; i += 1) {
-      if (this.isAdjacentFields(field, this.fields[i])) {
-        adjacentFields[i] = this.fields[i];
+    for (Field potentialField : this.fields) {
+      if (isAdjacentFields(field, potentialField)) {
+        adjacentFields[index] = potentialField;
+        index++;
       }
     }
 
-    return adjacentFields;
+    return Arrays.copyOf(adjacentFields, index);
   }
 
   public Field getEmptyField() {
