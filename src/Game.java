@@ -30,4 +30,12 @@ public class Game {
   public boolean isGameOver() {
     return this.gameOver;
   }
+
+  public static void Main(String[] args) {
+    Game game = new Game();
+    game.initBoardRandom();
+
+    System.out.println("Welcome to switch game");
+    game.printBoard();
+  }
 }
