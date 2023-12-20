@@ -7,7 +7,9 @@ public class Field {
   private int y;
   private int value;
 
-  Field(int x, int y, int value) {
+  public Field() {}
+
+  public void init(int x, int y, int value) {
     this.x = x;
     this.y = y;
     this.value = value;

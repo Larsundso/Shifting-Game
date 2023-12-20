@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Pitch {
 
@@ -7,9 +9,21 @@ public class Pitch {
 
   // functions
 
-  Pitch() {
+  Pitch() {}
+
+  public void init(int size) {
+    Integer[] values = new Integer[size * size];
+    for (int i = 0; i < values.length; i += 1) {
+      values[i] = i;
+    }
+
+    List<Integer> valuesList = Arrays.asList(values);
+    Collections.shuffle(valuesList);
+    valuesList.toArray(values);
+
     for (int i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = new Field();
+      this.fields[i].init(i % 3, i / 3, values[i]);
     }
   }
 

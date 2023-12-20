@@ -7,6 +7,10 @@ public class Game {
 
   // functions
 
+  public Game() {
+    this.pitch = new Pitch();
+  }
+
   public void printBoard() {
     Field[] fields = this.pitch.getFields();
     int[][] output = new int[(int) Math.sqrt(fields.length)][(int) Math.sqrt(
@@ -26,7 +30,7 @@ public class Game {
   }
 
   public void initBoardRandom() {
-    this.pitch = new Pitch();
+    this.pitch.init(3);
   }
 
   public boolean isGameOver() {
