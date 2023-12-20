@@ -29,7 +29,7 @@ public class Game {
 
   public void initBoardRandom() {
     this.pitch = new Pitch();
-    this.pitch.init(9);
+    this.pitch.init(3);
   }
 
   public boolean isGameOver() {
