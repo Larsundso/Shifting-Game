@@ -8,16 +8,16 @@ public class Game {
   // functions
 
   public void printBoard(Pitch pitch) {
-
-
-
-		for (int i = 0; i < 9; i++) {
-			System.out.print(i + " ");
-			for (int j = 0; j < pitch.getFields().length; j++) {
-
-			}
-			System.out.println(); // Zeilenwechsel
+    int[][] output;
+    Field[] fields = pitch.getFields();
+		for (Field field : fields) {
+      output[field.getX()][field.getY()] = field.getValue;
 		}
+    for (int i=0; i<output.length; i++){
+      for (int j=0; j<output.length; i++){
+        System.out.print(output[i][j]);
+      }
+    }
   }
 
   public void initBoardRandom() {
