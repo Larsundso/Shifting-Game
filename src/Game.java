@@ -56,6 +56,7 @@ public class Game {
     Scanner scan = new Scanner(System.in);
     System.out.println("Want to try again? (Y/N)");
     String again = scan.next();
+    scan.close();
     if( again == "Y" || again == "y"){
 
     }
