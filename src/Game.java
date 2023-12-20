@@ -14,6 +14,10 @@ public class Game {
 
   // functions
 
+  /**
+   * Prints the current state of the game board.
+   * @return void
+   */
   public void printBoard() {
     int s = 0;
     Field[] fields = this.pitch.getFields();
@@ -46,6 +50,10 @@ public class Game {
     System.out.println();
   }
 
+  /**
+   * Initializes the game board and shuffles the values. Then passes them to the Pitch class.
+   * @return void
+   */
   public void initBoardRandom() {
     this.pitch = new Pitch();
 
@@ -61,10 +69,20 @@ public class Game {
     this.pitch.init(values);
   }
 
+  /**
+   * Checks if the game is over.
+   * @return true if the game is over, false otherwise.
+   */
   public boolean isGameOver() {
     return this.gameOver;
   }
 
+  /**
+   * Prompts the user to try the game again and handles the user's response.
+   * If the user chooses to try again, a new instance of the Game class is created and started.
+   * If the user chooses not to try again, the program exits.
+   * @return void
+   */
   public void tryAgain() {
     System.out.println("Great, you did it");
     System.out.println("You needed " + this.moves + " moves");
@@ -81,6 +99,14 @@ public class Game {
     System.exit(0);
   }
 
+  /**
+   * Takes user input for the move number or allows for an automatic move.
+   * Increments the number of moves.
+   * Swaps the fields on the pitch based on the user's input.
+   * Checks if the game is over by checking if the pitch is in the winning state.
+   * If the game is over, calls the tryAgain function.
+   * @return void
+   */
   public void input() {
     System.out.println("move number: (or type \"a\" for auto)");
     this.moves += 1;
@@ -120,6 +146,13 @@ public class Game {
     }
   }
 
+  /**
+   * Starts the game by initializing the playing field, displaying the welcome message,
+   * and prompting the user for custom numbers if desired. Then, it enters the game loop
+   * where the board is printed and user input is processed until the game is over.
+   * @param scanner the Scanner object used for user input
+   * @return void
+   */
   public void start(Scanner scanner) {
     this.scanner = scanner;
 
