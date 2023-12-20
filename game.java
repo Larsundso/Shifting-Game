@@ -7,7 +7,18 @@ public class Game {
 
   // functions
 
-  public void printBoard(Pitch pitch) {}
+  public void printBoard(Pitch pitch) {
+
+
+
+		for (int i = 0; i < 9; i++) {
+			System.out.print(i + " ");
+			for (int j = 0; j < pitch.getFields().length; j++) {
+
+			}
+			System.out.println(); // Zeilenwechsel
+		}
+  }
 
   public void initBoardRandom() {
     this.pitch = new Pitch();
@@ -20,9 +31,9 @@ public class Game {
   public void Game(String[] args) {
     // Game game = new Game();
     // Pitch pitch = game.initBoardRandom();
-
+    System.out.println("Welcome to switch game")
     // while (!game.isGameOver()) {
-    //   game.printBoard(pitch);
+       game.printBoard(pitch);
     // }
   }
 }
