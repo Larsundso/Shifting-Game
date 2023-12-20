@@ -23,7 +23,7 @@ public class Pitch {
 
     for (int i = 0; i < this.fields.length; i += 1) {
       this.fields[i] = new Field();
-      this.fields[i].init(i % 3, i / 3, values[i]);
+      this.fields[i].init(i % size, i / size, values[i]);
     }
   }
 
