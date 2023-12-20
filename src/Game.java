@@ -16,10 +16,12 @@ public class Game {
     for (Field field : fields) {
       output[field.getX()][field.getY()] = field.getValue();
     }
+    
     for (int i = 0; i < output.length; i++) {
       for (int j = 0; j < output.length; i++) {
-        System.out.print(output[i][j]);
+        System.out.print(output[i][j]+" ");
       }
+      System.out.println();
     }
   }
 
