@@ -6,12 +6,15 @@ public class Pitch {
 
   private Field[] fields = new Field[9];
   private Field emptyField;
+  private int size;
 
   // functions
 
   Pitch() {}
 
   public void init(int size) {
+    this.size = size;
+
     Integer[] values = new Integer[size * size];
     for (int i = 0; i < values.length; i += 1) {
       values[i] = i;
@@ -28,16 +31,21 @@ public class Pitch {
   }
 
   public boolean isValidSelection(int selection) {
-    if (selection < 1 || selection > 9) return false;
+    if (selection < 1 || selection > this.size) return false;
 
+    Field selectedField = null;
     for (Field field : this.fields) {
-      if (
-        field.getValue() == selection &&
-        Arrays.stream(this.getAdjacentFields(field)).anyMatch(f -> f.getEmpty())
-      ) return true;
+      if (field.getValue() == selection) {
+        selectedField = field;
+      }
     }
+    if (selectedField == null) return false;
 
-    return true;
+    List<Field> adjacentFields = Arrays.asList(
+      this.getAdjacentFields(selectedField)
+    );
+
+    return adjacentFields.contains(selectedField);
   }
 
   public void swapFields(Field field) {

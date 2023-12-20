@@ -28,8 +28,10 @@ public class Game {
   }
 
   public void initBoardRandom() {
+    System.out.println(this.pitch);
     this.pitch = new Pitch();
     this.pitch.init(3);
+    System.out.println(this.pitch);
   }
 
   public boolean isGameOver() {
@@ -41,7 +43,8 @@ public class Game {
     boolean valid;
 
     System.out.println("move number: ");
-    int number = scan.nextInt();
+    String input = scan.next();
+    int number = Integer.parseInt(input);
 
     scan.close();
     valid = pitch.isValidSelection(number);
@@ -60,11 +63,12 @@ public class Game {
     } while (valid == false);
   }
 
-  public static void main(String[] args) {
-    Game game = new Game();
-    game.initBoardRandom();
+  public void start() {
+    this.initBoardRandom();
 
     System.out.println("Welcome to switch game");
-    game.printBoard();
+    this.printBoard();
+
+    this.input();
   }
 }
