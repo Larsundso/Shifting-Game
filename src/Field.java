@@ -64,24 +64,6 @@ public class Field {
   // setters
 
   /**
-   * Sets the x-coordinate of the field.
-   * @param x the new x-coordinate
-   * @return void
-   */
-  public void setX(int x) {
-    this.x = x;
-  }
-
-  /**
-   * Sets the y-coordinate of the field.
-   * @param y the new y-coordinate
-   * @return void
-   */
-  public void setY(int y) {
-    this.y = y;
-  }
-
-  /**
    * Sets the value of the field.
    * @param value the new value to be set
    * @return void
